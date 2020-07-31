@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Header from "./containers/Header";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./containers/Home";
+import Characters from "./containers/Characters";
+import Description from "./containers/Description";
+import Comics from "./containers/Comics";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [id, setId] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="page">
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/comics">
+            <Comics />
+          </Route>
+          <Route path="/characters/:id">
+            <Description id={id} />
+          </Route>
+          <Route path="/characters">
+            <Characters setId={setId} />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
