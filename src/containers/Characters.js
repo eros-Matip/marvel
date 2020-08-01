@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Pagintation from "../components/Pagination";
+import Pagination from "../components/Pagination";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import Cookies from "js-cookie";
 
 const Characters = ({ setId }) => {
-  const [datas, setDatas] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
+  const [data, setData] = useState({});
+  const [datas, setDatas] = useState({});
+  const [favoris, setFavoris] = useState(false);
+
+  const handleClick = () => {
+    setFavoris(true);
+  };
 
   useEffect(() => {
     const limit = 100;
@@ -26,6 +34,8 @@ const Characters = ({ setId }) => {
 
   return (
     <div>
+      <Header data={data} setData={setData} />
+
       {isLoading ? (
         <p>En cours de chargement ...</p>
       ) : (
@@ -34,6 +44,9 @@ const Characters = ({ setId }) => {
             return (
               <div className="card">
                 <div>
+                  {favoris
+                    ? Cookies.set("id", character.id)
+                    : Cookies.remove("id", character.id)}
                   <Link
                     key={character.id}
                     to={"/characters/" + character.id}
@@ -46,16 +59,23 @@ const Characters = ({ setId }) => {
                         className="img-characteres"
                         src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                       ></img>
-                      <h2>{character.name}</h2>
+                      <h2 className="h2-characters">{character.name}</h2>
+
                       <p className="text-characters">{character.description}</p>
                     </div>
                   </Link>
+                  <input
+                    type="checkbox"
+                    id="favoris"
+                    name="favoris"
+                    onClick={handleClick}
+                  ></input>
                 </div>
               </div>
             );
           })}
 
-          <Pagintation
+          <Pagination
             limit={datas.data.limit}
             total={datas.data.total}
             setPage={setPage}

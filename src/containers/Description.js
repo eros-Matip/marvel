@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header";
 
 const Description = () => {
   const { id } = useParams();
@@ -29,27 +30,33 @@ const Description = () => {
   console.log("dataComics->", dataComics);
 
   return (
-    <div>
+    <div className="page-description">
+      <Header data={data} setData={setData} />
       {isLoading ? (
-        <p>Chargement en cours ...</p>
+        <h1 className="waiting">Your comics comming soon ...</h1>
       ) : (
-        <div>
+        <div className="all-description">
           <div>
             {data.map((description) => {
               return (
                 <div key={description.id}>
-                  <h1>{description.name}</h1>
-                  <p>{description.description}</p>
-                  <img
-                    src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
-                  ></img>
-                  <div>
+                  <div className="box-description">
+                    <h1>{description.name}</h1>
+                    <p>{description.description}</p>
+                    <img
+                      className="img.description"
+                      src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
+                    ></img>
+                  </div>
+
+                  <div className="box-comic">
                     {dataComics.map((comic) => {
                       return (
                         <div key={comic.id}>
                           <h2>{comic.title}</h2>
 
                           <img
+                            className="img-comic"
                             src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                           ></img>
                         </div>

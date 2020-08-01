@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "./containers/Header";
+import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import Characters from "./containers/Characters";
@@ -13,7 +13,6 @@ const App = () => {
   return (
     <div className="page">
       <Router>
-        <Header />
         <Switch>
           <Route path="/comics">
             <Comics />
