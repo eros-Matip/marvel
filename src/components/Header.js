@@ -3,32 +3,16 @@ import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../img/logo.png";
 
-function Header({ setData }) {
-  const [search, setSearch] = useState("");
+function Header({ handleSearch, handleSubmit, search }) {
   const [hidden, setHidden] = useState(false);
-  const apikey = process.env.REACT_APP_KEY_PUBLIC;
-  const hash = process.env.REACT_APP_HASH;
 
   let history = useHistory();
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    event.target.value !== "" && setSearch(event.target.value.toLowerCase());
-  };
 
   const onclickHidden = () => {
     setHidden(!hidden);
   };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await axios.get(
-      `http://gateway.marvel.com/v1/public/characters?name=${search}&ts=1&apikey=${apikey}&hash=${hash}`
-    );
-    setData(response.data);
-  };
   const handleChangeCharacters = () => {
-    history.push("/");
+    history = "/characters";
   };
 
   return (
@@ -46,7 +30,6 @@ function Header({ setData }) {
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                defaultValue={search}
                 placeholder="search ..."
                 onChange={handleSearch}
               ></input>

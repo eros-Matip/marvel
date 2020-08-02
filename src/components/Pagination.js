@@ -1,15 +1,15 @@
 import React from "react";
 
 function Pagination({ limit, total, setPage, setOffset }) {
-  const buttonsCount = total / limit;
+  const buttonsCount = Math.round(total / limit);
 
   let buttons = [];
+  console.log("buttons->", buttons);
 
-  for (let index = 0; index <= buttonsCount; index++) {
-    const result = index * limit;
+  for (let index = 1; index <= buttonsCount; index++) {
+    const result = index * limit - 100;
     buttons.push(
       <button
-        className="pagination"
         key={index}
         onClick={() => {
           setPage(index);

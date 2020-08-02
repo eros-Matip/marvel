@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Search({ setDatas }) {
+function Search(setData) {
+  // const [data, setData] = useState("");
   const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
   const apikey = process.env.REACT_APP_KEY_PUBLIC;
   const hash = process.env.REACT_APP_HASH;
 
@@ -15,8 +18,11 @@ function Search({ setDatas }) {
     const response = await axios.get(
       `http://gateway.marvel.com/v1/public/characters?name=${search}&ts=1&apikey=${apikey}&hash=${hash}`
     );
-    setDatas(response.data);
+    setData(response.data);
+    setIsLoading(false);
   };
+
+  // console.log("data->", data);
 
   return (
     <div>

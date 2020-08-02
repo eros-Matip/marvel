@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Description from "./Description";
 import Pagination from "../components/Pagination";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
+import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Characters = ({ setId }) => {
+const Characters = ({
+  setId,
+  setLocation,
+  response,
+  data,
+  setData,
+  page,
+  offset,
+  setPage,
+  setOffset,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [data, setData] = useState({});
-  const [datas, setDatas] = useState({});
   const [favoris, setFavoris] = useState(false);
+  const [hidden, sethidden] = useState(true);
+  const location = useLocation();
 
   const handleClick = () => {
     setFavoris(true);
@@ -24,64 +32,65 @@ const Characters = ({ setId }) => {
 
     const fetchData = async () => {
       const response = await axios.get(
-        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&limit=${limit}&ts=1&apikey=${apikey}&hash=${hash}`
+        `http://gateway.marvel.com/v1/public/characters?&offset=${offset}&limit=${limit}&ts=1&apikey=${apikey}&hash=${hash}`
       );
-      setDatas(response.data);
+      setData(response.data);
       setIsLoading(false);
     };
     fetchData();
   }, [page]);
+  setLocation(location.pathname);
 
   return (
     <div>
-      <Header data={data} setData={setData} />
+      {hidden ? (
+        <div>
+          {isLoading ? (
+            <h1 className="waiting">is Loading ...</h1>
+          ) : (
+            <div className="all-card">
+              {data.data.results.map((character) => {
+                return (
+                  <div className="card" key={character.id}>
+                    <div>
+                      {favoris
+                        ? Cookies.set("id", character.id)
+                        : Cookies.remove("id", character.id)}
+                      <Link
+                        key={character.id}
+                        to={"/characters/" + character.id}
+                        onClick={() => {
+                          setId(character.id);
+                          sethidden(false);
+                        }}
+                      >
+                        <div className="box-characters">
+                          <img
+                            className="img-characteres"
+                            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                          ></img>
+                          <h2 className="h2-characters">{character.name}</h2>
 
-      {isLoading ? (
-        <p>En cours de chargement ...</p>
-      ) : (
-        <div className="all-card">
-          {datas.data.results.map((character) => {
-            return (
-              <div className="card">
-                <div>
-                  {favoris
-                    ? Cookies.set("id", character.id)
-                    : Cookies.remove("id", character.id)}
-                  <Link
-                    key={character.id}
-                    to={"/characters/" + character.id}
-                    onClick={() => {
-                      setId(character.id);
-                    }}
-                  >
-                    <div className="box-characters">
-                      <img
-                        className="img-characteres"
-                        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                      ></img>
-                      <h2 className="h2-characters">{character.name}</h2>
-
-                      <p className="text-characters">{character.description}</p>
+                          <p className="text-characters">
+                            {character.description}
+                          </p>
+                        </div>
+                      </Link>
+                      <input
+                        type="checkbox"
+                        id="favoris"
+                        name="favoris"
+                        onClick={handleClick}
+                      ></input>
                     </div>
-                  </Link>
-                  <input
-                    type="checkbox"
-                    id="favoris"
-                    name="favoris"
-                    onClick={handleClick}
-                  ></input>
-                </div>
-              </div>
-            );
-          })}
-
-          <Pagination
-            limit={datas.data.limit}
-            total={datas.data.total}
-            setPage={setPage}
-            setOffset={setOffset}
-          />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
+      ) : (
+        <Description />
       )}
     </div>
   );

@@ -3,15 +3,18 @@ html {
   height: 100vh;
 }
 .waiting {
+  height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
+  color: white;
 }
 .page {
   height: 100vh;
 }
-.page-comics,
-.page-description {
+.page-comics {
   height: 100vh;
 }
 .pagination {
@@ -20,44 +23,12 @@ html {
   color: white;
 }
 
-/* ***** HOME ***** */
-
-.home {
-  background-color: black;
-  height: 100%;
-  width: 100%;
-}
-.box-home {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 10px;
-}
-.logo-home {
-  margin: 10px 0px 0px 10px;
-  width: 20%;
-}
-.menu-home {
-  display: flex;
-  align-items: flex-end;
-}
-.text-home {
-  display: flex;
-  color: white;
-  margin: 15px;
-}
-.img-home {
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: flex-end;
-}
-
 /* ***** HEADER ***** */
 .header {
   background-color: black;
   position: fixed;
   width: 100%;
-  box-shadow: rgb(26, 26, 26) 5px 5px 5px;
+  box-shadow: rgb(26, 26, 26) 2px 15px 10px;
   top: 0px;
 }
 .box-header {
@@ -100,7 +71,6 @@ i.fas.fa-search {
   background-color: black;
   border: none;
   border-radius: 5px;
-  /* box-shadow: rgb(85, 85, 85) 2px 2px 2px 3px; */
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -110,6 +80,39 @@ i.fas.fa-search {
 .comics :focus {
   outline: none;
 }
+
+/* ***** HOME ***** */
+
+.home {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+}
+.box-home {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
+.logo-home {
+  margin: 10px 0px 0px 10px;
+  width: 20%;
+}
+.menu-home {
+  display: flex;
+  align-items: flex-end;
+}
+.text-home {
+  display: flex;
+  color: white;
+  margin: 15px;
+}
+.img-home {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* ***** CHARACTERS ***** */
 .box-characters {
   width: 200px;
@@ -177,10 +180,10 @@ a {
   padding: 10px;
   box-sizing: border-box;
   border-radius: 3px;
+  overflow: hidden;
 }
 .box-comics:hover {
   box-shadow: rgb(151, 151, 151) 5px 5px 15px 5px;
-
   cursor: pointer;
 }
 .img-comics {
@@ -190,6 +193,7 @@ a {
 }
 .img-comics:hover {
   display: none;
+  overflow: scroll;
 }
 .comics-soon {
   height: 100%;
@@ -204,21 +208,61 @@ a {
   color: white;
 }
 
-/* ***** DESCRIPTION ***** */
-
-.box-description {
-  margin-top: 50px;
-  border: 1px solid;
+/* ***** MODAL ***** */
+.page-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(51, 153, 76);
   height: 100%;
-  width: 50%;
+  width: 100%;
+  background-color: black;
 }
-.img.description {
-  display: none;
+.all-description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  height: 90vh;
+  width: 90vh;
+}
+.img-description {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid yellow;
+  margin: auto;
+}
+.img-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .box-comic {
+  margin: 30px;
   border: 1px solid red;
-  width: 50%;
+  width: 100%;
+  overflow: scroll;
+  box-sizing: border-box;
+  display: flex;
+  box-sizing: border-box;
+  /* flex-wrap: wrap; */
 }
 .img-comic {
-  width: 100%;
+  width: 200px;
+  height: 250px;
+  margin: 5px;
+}
+.box-comics-pictures {
+  margin-right: 10px;
 }
