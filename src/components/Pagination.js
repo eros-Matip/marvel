@@ -4,7 +4,6 @@ function Pagination({ limit, total, setPage, setOffset }) {
   const buttonsCount = Math.round(total / limit);
 
   let buttons = [];
-  console.log("buttons->", buttons);
 
   for (let index = 1; index <= buttonsCount; index++) {
     const result = index * limit - 100;

@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../img/logo.png";
+import Cookies from "js-cookie";
 
-function Header({ handleSearch, handleSubmit, search }) {
+function Header({ handleSearch, handleSubmit }) {
+  const name = Cookies.get("username");
   const [hidden, setHidden] = useState(false);
+  const [log, setlog] = useState(true);
 
   let history = useHistory();
 
@@ -12,8 +14,19 @@ function Header({ handleSearch, handleSubmit, search }) {
     setHidden(!hidden);
   };
   const handleChangeCharacters = () => {
-    history = "/characters";
+    history.push("/characters");
   };
+
+  const handleClick = () => {
+    Cookies.remove("username");
+    history.push("/home");
+    setlog(!log);
+  };
+
+  const handleClicklogin = () => {
+    setlog(!log);
+  };
+  console.log("name->", name);
 
   return (
     <div className="header">
@@ -48,7 +61,25 @@ function Header({ handleSearch, handleSubmit, search }) {
           <Link to="/comics">
             <button className="comics">Comics</button>
           </Link>
-          <button className="sign-in">Sign In / logIn</button>
+          {name ? (
+            <div>
+              <p className="name-header">{name}</p>
+              <button onClick={handleClick}>Se Déconnecter</button>
+            </div>
+          ) : (
+            <div>
+              <Link to="signUp">
+                <button className="signUp" onClick={handleClicklogin}>
+                  SignUp
+                </button>
+              </Link>
+              <Link to="logIn">
+                <button className="logIn" onClick={handleClicklogin}>
+                  logIn
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

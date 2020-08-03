@@ -7,6 +7,8 @@ import Description from "./containers/Description";
 import Comics from "./containers/Comics";
 import axios from "axios";
 import Pagination from "./components/Pagination";
+import SignUp from "./containers/SignUp";
+import LogIn from "./containers/LogIn";
 import "./App.css";
 
 const App = () => {
@@ -16,14 +18,13 @@ const App = () => {
   const [location, setLocation] = useState("");
   const [data, setData] = useState({});
   const [offset, setOffset] = useState(0);
-  const limit = 100;
 
+  const limit = 100;
   let locationUrl = "";
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
-  console.log("search->", search);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,8 +47,13 @@ const App = () => {
           handleSubmit={handleSubmit}
           data={setData}
         />
-
         <Switch>
+          <Route path="/logIn">
+            <LogIn />
+          </Route>
+          <Route path="/signUp">
+            <SignUp />
+          </Route>
           <Route path="/comics">
             <Comics
               setId={setId}

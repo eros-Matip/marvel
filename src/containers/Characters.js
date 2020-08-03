@@ -92,6 +92,7 @@ const Characters = ({
       ) : (
         <Description />
       )}
+      <Pagination />
     </div>
   );
 };
