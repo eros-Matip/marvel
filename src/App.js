@@ -20,6 +20,7 @@ const App = () => {
   const [offset, setOffset] = useState(0);
 
   const limit = 100;
+
   let locationUrl = "";
 
   const handleSearch = (event) => {

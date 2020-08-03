@@ -8,6 +8,10 @@ function Header({ handleSearch, handleSubmit }) {
   const [hidden, setHidden] = useState(false);
   const [log, setlog] = useState(true);
 
+  const handleClickSubmit = () => {
+    setHidden(false);
+  };
+
   let history = useHistory();
 
   const onclickHidden = () => {
@@ -42,11 +46,21 @@ function Header({ handleSearch, handleSubmit }) {
           ) : (
             <form onSubmit={handleSubmit}>
               <input
+                className="input-search"
                 type="text"
                 placeholder="search ..."
                 onChange={handleSearch}
               ></input>
-              <button type="submit">search</button>
+              <button className="btn-search" type="submit">
+                search
+              </button>
+              <button
+                className="btn-searchClose"
+                type="checked"
+                onClick={handleClickSubmit}
+              >
+                X
+              </button>
             </form>
           )}
         </div>
@@ -62,19 +76,22 @@ function Header({ handleSearch, handleSubmit }) {
             <button className="comics">Comics</button>
           </Link>
           {name ? (
-            <div>
+            <div className="unlog">
               <p className="name-header">{name}</p>
-              <button onClick={handleClick}>Se Déconnecter</button>
+              <button className="btn-unlog" onClick={handleClick}>
+                <strong>Se Déconnecter</strong>
+              </button>
             </div>
           ) : (
-            <div>
+            <div className="logInSignUp">
               <Link to="signUp">
-                <button className="signUp" onClick={handleClicklogin}>
+                <button className="btn-signUp" onClick={handleClicklogin}>
                   SignUp
                 </button>
               </Link>
+              <p className="white">/</p>
               <Link to="logIn">
-                <button className="logIn" onClick={handleClicklogin}>
+                <button className="btn-logIn" onClick={handleClicklogin}>
                   logIn
                 </button>
               </Link>

@@ -53,31 +53,34 @@ function Description() {
                 >
                   <button onClick={hiddenModalChange}>x</button>
                   <div key={description.id} className="box-description">
-                    <div>
-                      <div className="img-modal">
-                        <h1>{description.name}</h1>
-                        {/* <p>{description.description}</p> */}
-                      </div>
-                      <div>
+                    <div className="img-comic-description">
+                      <div className="box-img-decription">
                         <img
                           className="img-description"
                           src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
                         ></img>
+                      </div>
+                      <div className="img-modal">
+                        <h1 className="h1-description">{description.name}</h1>
+                        <p className="p-description">
+                          {description.description}
+                        </p>
                       </div>
                     </div>
 
                     <div className="box-comic">
                       {dataComics.map((comic) => {
                         return (
-                          <div key={comic.id}>
-                            <div>
+                          <div className="all-div-comic" key={comic.id}>
+                            <div className="all-img-comic">
                               <img
                                 className="img-comic"
                                 src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                               ></img>
                             </div>
-                            <div>
-                              <h2>{comic.title}</h2>
+                            <div className="text-comics">
+                              <h2 className="h2-comics">{comic.title}</h2>
+                              <p className="p-comics">{comic.description}</p>
                             </div>
                           </div>
                         );

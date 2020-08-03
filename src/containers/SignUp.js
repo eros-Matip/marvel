@@ -40,44 +40,55 @@ const LogIn = () => {
       }
     );
     setData(response.data);
+
     console.log("data->", data);
     if (data.token) {
       Cookies.set("userToken", data.token);
-      Cookies.set("username", data.username);
+      Cookies.set("username", data.account.username);
       history.push("/characters");
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Hello SignUp</h1>
+    <div className="box-signIn">
+      <form className="form-logIn" onSubmit={handleSubmit}>
+        <h1>SignUp</h1>
         <input
+          className="input-signIn"
           type="email"
           placeholder="Email"
           onChange={handleChangeEmail}
         ></input>
         <input
+          className="input-signIn"
           type="text"
           placeholder="username"
           onChange={handleChangeUsername}
         ></input>
         <input
+          className="input-signIn"
           type="number"
           placeholder="phone"
           onChange={handleChangePhone}
         ></input>
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={handleChangePassword}
-        ></input>
-        <input
-          type="password"
-          placeholder="PasswordConfirm"
-          onChange={handleChangePasswordConfirm}
-        ></input>
-        <button type="submit">LogIn</button>
+        <div className="input-password">
+          <input
+            className="input-signIn"
+            type="password"
+            placeholder="Password"
+            onChange={handleChangePassword}
+          ></input>
+          <input
+            className="input-signIn"
+            type="password"
+            placeholder="PasswordConfirm"
+            onChange={handleChangePasswordConfirm}
+          ></input>
+        </div>
+
+        <button className="btn-signInSubmit" type="submit">
+          LogIn
+        </button>
       </form>
     </div>
   );

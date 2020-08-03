@@ -35,20 +35,24 @@ const LogIn = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Hello LogIn</h1>
+    <div className="box-logIn">
+      <form className="form-logIn" onSubmit={handleSubmit}>
+        <h1>LogIn</h1>
         <input
+          className="input-form"
           type="email"
           placeholder="Email"
           onChange={handleChangeEmail}
         ></input>
         <input
+          className="input-form"
           type="password"
           placeholder="Password"
           onChange={handleChangePassword}
         ></input>
-        <button type="submit">LogIn</button>
+        <button className="btn-logInSubmit" type="submit">
+          LogIn
+        </button>
       </form>
     </div>
   );
