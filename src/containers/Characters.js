@@ -3,12 +3,10 @@ import axios from "axios";
 import Description from "./Description";
 import Pagination from "../components/Pagination";
 import { Link, useLocation } from "react-router-dom";
-import Cookies from "js-cookie";
 
 const Characters = ({
   setId,
   setLocation,
-  response,
   data,
   setData,
   page,
@@ -17,16 +15,18 @@ const Characters = ({
   setOffset,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [favoris, setFavoris] = useState(false);
+  // const [favoris, setFavoris] = useState(false);
   const [hidden, sethidden] = useState(true);
   const location = useLocation();
+  console.log(setId);
 
-  const handleClick = () => {
-    setFavoris(true);
-  };
+  console.log("data->", data);
+  console.log("page->", page);
+  console.log("offset->", offset);
+
+  const limit = 100;
 
   useEffect(() => {
-    const limit = 100;
     const apikey = process.env.REACT_APP_KEY_PUBLIC;
     const hash = process.env.REACT_APP_HASH;
 
@@ -53,9 +53,6 @@ const Characters = ({
                 return (
                   <div className="card" key={character.id}>
                     <div>
-                      {favoris
-                        ? Cookies.set("id", character.id)
-                        : Cookies.remove("id", character.id)}
                       <Link
                         key={character.id}
                         to={"/characters/" + character.id}
@@ -66,7 +63,7 @@ const Characters = ({
                       >
                         <div className="box-characters">
                           <img
-                            className="img-characteres"
+                            className="img-characters"
                             src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                           ></img>
                           <h2 className="h2-characters">{character.name}</h2>
@@ -76,23 +73,25 @@ const Characters = ({
                           </p>
                         </div>
                       </Link>
-                      <input
-                        type="checkbox"
-                        id="favoris"
-                        name="favoris"
-                        onClick={handleClick}
-                      ></input>
                     </div>
                   </div>
                 );
               })}
             </div>
           )}
+          <Pagination
+            className="pagination"
+            limit={limit}
+            total={data.total}
+            page={page}
+            setPage={setPage}
+            offset={offset}
+            setOffset={setOffset}
+          />
         </div>
       ) : (
         <Description />
       )}
-      <Pagination />
     </div>
   );
 };

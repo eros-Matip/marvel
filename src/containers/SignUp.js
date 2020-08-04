@@ -41,7 +41,6 @@ const LogIn = () => {
     );
     setData(response.data);
 
-    console.log("data->", data);
     if (data.token) {
       Cookies.set("userToken", data.token);
       Cookies.set("username", data.account.username);

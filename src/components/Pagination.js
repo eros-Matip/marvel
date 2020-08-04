@@ -9,6 +9,7 @@ function Pagination({ limit, total, setPage, setOffset }) {
     const result = index * limit - 100;
     buttons.push(
       <button
+        className="pagination"
         key={index}
         onClick={() => {
           setPage(index);

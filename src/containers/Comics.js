@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import { useLocation } from "react-router-dom";
 
 const Comics = ({ setId, setLocation, data, setData, offset }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [,] = useState(0);
   const [page, setPage] = useState(0);
-  const [favoris, setFavoris] = useState(false);
+  // const [favoris, setFavoris] = useState(false);
   const location = useLocation();
 
   const limit = 100;
-
-  const handleClick = () => {
-    setFavoris(true);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,12 +36,6 @@ const Comics = ({ setId, setLocation, data, setData, offset }) => {
             return (
               <div key={comic.id} className="box-comics">
                 <div>
-                  <input
-                    type="checkbox"
-                    id="favoris"
-                    name="favoris"
-                    onClick={handleClick}
-                  ></input>
                   <img
                     className="img-comics"
                     src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}

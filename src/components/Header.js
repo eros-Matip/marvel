@@ -30,7 +30,6 @@ function Header({ handleSearch, handleSubmit }) {
   const handleClicklogin = () => {
     setlog(!log);
   };
-  console.log("name->", name);
 
   return (
     <div className="header">

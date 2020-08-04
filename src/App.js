@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
+import Footer from "./containers/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import Characters from "./containers/Characters";
 import Description from "./containers/Description";
 import Comics from "./containers/Comics";
 import axios from "axios";
-import Pagination from "./components/Pagination";
 import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
 import "./App.css";
@@ -86,14 +86,8 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-      <Pagination
-        limit={limit}
-        total={data.total}
-        page={page}
-        setPage={setPage}
-        offset={offset}
-        setOffset={setOffset}
-      />
+
+      <Footer app="React" school="Le Réacteur" name="Eros" />
     </div>
   );
 };

@@ -22,8 +22,6 @@ function Search(setData) {
     setIsLoading(false);
   };
 
-  // console.log("data->", data);
-
   return (
     <div>
       <form onSubmit={handleSubmit}>

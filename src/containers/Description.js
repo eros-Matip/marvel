@@ -36,11 +36,15 @@ function Description() {
   return (
     <div className="page-description">
       <Header data={data} setData={setData} />
+
       {isLoading ? (
         <h1 className="waiting">Your comics comming soon ...</h1>
       ) : (
-        <div>
-          <div className="all-description">
+        <div className="box-all-modal">
+          <button className="btn-close-modal" onClick={hiddenModalChange}>
+            x
+          </button>
+          <div className="all-modal">
             {data.map((description) => {
               return (
                 <div
@@ -50,37 +54,37 @@ function Description() {
                       : "translateY(-100vh)",
                     opacity: visible ? "1" : "0",
                   }}
+                  key={description.id}
                 >
-                  <button onClick={hiddenModalChange}>x</button>
-                  <div key={description.id} className="box-description">
-                    <div className="img-comic-description">
-                      <div className="box-img-decription">
-                        <img
-                          className="img-description"
-                          src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
-                        ></img>
-                      </div>
-                      <div className="img-modal">
+                  <div className="modal">
+                    <div className="img-description-modal">
+                      <img
+                        className="img-description"
+                        src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
+                      ></img>
+
+                      <div className="details-modal">
                         <h1 className="h1-description">{description.name}</h1>
+
                         <p className="p-description">
                           {description.description}
                         </p>
                       </div>
                     </div>
 
-                    <div className="box-comic">
-                      {dataComics.map((comic) => {
+                    <div className="box-modal">
+                      {dataComics.map((modal) => {
                         return (
-                          <div className="all-div-comic" key={comic.id}>
-                            <div className="all-img-comic">
+                          <div className="all-modal-magazin" key={modal.id}>
+                            <div className="all-img-modal">
                               <img
-                                className="img-comic"
-                                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                                className="img-modal"
+                                src={`${modal.thumbnail.path}.${modal.thumbnail.extension}`}
                               ></img>
                             </div>
-                            <div className="text-comics">
-                              <h2 className="h2-comics">{comic.title}</h2>
-                              <p className="p-comics">{comic.description}</p>
+                            <div className="text-modal">
+                              <h2 className="h2-modal">{modal.title}</h2>
+                              <p className="p-modal">{modal.description}</p>
                             </div>
                           </div>
                         );
