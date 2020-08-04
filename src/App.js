@@ -13,11 +13,9 @@ import "./App.css";
 
 const App = () => {
   const [id, setId] = useState("");
-  const [page, setPage] = useState(0);
   const [search, setSearch] = useState({});
   const [location, setLocation] = useState("");
   const [data, setData] = useState({});
-  const [offset, setOffset] = useState(0);
 
   const limit = 100;
 
@@ -61,9 +59,9 @@ const App = () => {
               setLocation={setLocation}
               data={data}
               setData={setData}
-              setPage={setPage}
-              offset={offset}
-              setOffset={setOffset}
+              // setPage={setPage}
+              // offset={offset}
+              // setOffset={setOffset}
             />
           </Route>
           <Route path="/characters/:id">
@@ -75,10 +73,10 @@ const App = () => {
               setLocation={setLocation}
               data={data}
               setData={setData}
-              page={page}
-              setPage={setPage}
-              offset={offset}
-              setOffset={setOffset}
+              // page={page}
+              // setPage={setPage}
+              // offset={offset}
+              // setOffset={setOffset}
             />
           </Route>
           <Route path="/">

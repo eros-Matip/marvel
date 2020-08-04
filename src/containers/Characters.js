@@ -9,12 +9,15 @@ const Characters = ({
   setLocation,
   data,
   setData,
-  page,
-  offset,
-  setPage,
-  setOffset,
+  // page,
+  // offset,
+  // setPage,
+  // setOffset,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(0);
+
   // const [favoris, setFavoris] = useState(false);
   const [hidden, sethidden] = useState(true);
   const location = useLocation();
@@ -77,17 +80,17 @@ const Characters = ({
                   </div>
                 );
               })}
+              <div className="coucou">
+                <Pagination
+                  className="pagination"
+                  limit={limit}
+                  total={data.total}
+                  setPage={setPage}
+                  setOffset={setOffset}
+                />
+              </div>
             </div>
           )}
-          <Pagination
-            className="pagination"
-            limit={limit}
-            total={data.total}
-            page={page}
-            setPage={setPage}
-            offset={offset}
-            setOffset={setOffset}
-          />
         </div>
       ) : (
         <Description />
