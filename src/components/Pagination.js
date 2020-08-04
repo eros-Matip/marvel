@@ -7,6 +7,7 @@ function Pagination({ limit, total, setPage, setOffset }) {
 
   for (let index = 1; index <= buttonsCount; index++) {
     const result = index * limit - 100;
+
     buttons.push(
       <button
         className="pagination"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Search(setData) {
-  // const [data, setData] = useState("");
+  const [data, setData] = useState("");
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 

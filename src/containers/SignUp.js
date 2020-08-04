@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
-const LogIn = () => {
+const SignUp = () => {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -92,4 +92,4 @@ const LogIn = () => {
     </div>
   );
 };
-export default LogIn;
+export default SignUp;

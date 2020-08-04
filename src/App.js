@@ -67,6 +67,7 @@ const App = () => {
           <Route path="/characters/:id">
             <Description id={id} />
           </Route>
+          {console.log("data->", data)}
           <Route path="/characters">
             <Characters
               setId={setId}

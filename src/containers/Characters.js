@@ -21,11 +21,6 @@ const Characters = ({
   // const [favoris, setFavoris] = useState(false);
   const [hidden, sethidden] = useState(true);
   const location = useLocation();
-  console.log(setId);
-
-  console.log("data->", data);
-  console.log("page->", page);
-  console.log("offset->", offset);
 
   const limit = 100;
 
@@ -84,7 +79,7 @@ const Characters = ({
                 <Pagination
                   className="pagination"
                   limit={limit}
-                  total={data.total}
+                  total={data.data.total}
                   setPage={setPage}
                   setOffset={setOffset}
                 />
