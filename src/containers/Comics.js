@@ -3,9 +3,11 @@ import Pagination from "../components/Pagination";
 import axios from "axios";
 // import Cookies from "js-cookie";
 import { useLocation } from "react-router-dom";
+import ReactLoading from "react-loading";
 
-const Comics = ({ setId, setLocation, data, setData, offset }) => {
+const Comics = ({ setId, setLocation, fetched, setFetched }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
   // const [favoris, setFavoris] = useState(false);
   const location = useLocation();
@@ -17,10 +19,10 @@ const Comics = ({ setId, setLocation, data, setData, offset }) => {
       const response = await axios.get(
         `http://gateway.marvel.com/v1/public/comics?offset=${offset}&limit=${limit}&${process.env.REACT_APP_TS_HASH}`
       );
-      setData(response.data);
+      setFetched(response.data);
       setIsLoading(false);
+      fetchData();
     };
-    fetchData();
   }, [page]);
   setLocation(location.pathname);
 
@@ -28,15 +30,17 @@ const Comics = ({ setId, setLocation, data, setData, offset }) => {
     <div className="page-comics">
       {isLoading ? (
         <h1 className="waiting">
-          Veuillez patienter pendant le chargement ...
+          Veuillez patienter pendant le chargement
+          <ReactLoading type={"cylon"} />
         </h1>
       ) : (
         <div className="all-comics">
-          {data.data.results.map((comic) => {
+          {fetched.data.results.map((comic) => {
             return (
               <div key={comic.id} className="box-comics">
                 <div>
                   <img
+                    alt={comic.name}
                     className="img-comics"
                     src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                   ></img>
@@ -54,9 +58,17 @@ const Comics = ({ setId, setLocation, data, setData, offset }) => {
               </div>
             );
           })}
+          <div className="pagination">
+            <Pagination
+              className="pagination"
+              limit={limit}
+              total={fetched.data.total}
+              setPage={setPage}
+              setOffset={setOffset}
+            />
+          </div>
         </div>
       )}
-      <Pagination limit={data.limit} total={data.total} setPage={setPage} />
     </div>
   );
 };

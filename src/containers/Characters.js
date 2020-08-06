@@ -3,22 +3,14 @@ import axios from "axios";
 import Description from "./Description";
 import Pagination from "../components/Pagination";
 import { Link, useLocation } from "react-router-dom";
+import ReactLoading from "react-loading";
 
-const Characters = ({
-  setId,
-  setLocation,
-  data,
-  setData,
-  // page,
-  // offset,
-  // setPage,
-  // setOffset,
-}) => {
+const Characters = ({ setId, setLocation, fetched, setFetched }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
 
-  // const [favoris, setFavoris] = useState(false);
+  // const [favorisTab, setFavorisTab] = useState([]);
   const [hidden, sethidden] = useState(true);
   const location = useLocation();
 
@@ -32,7 +24,7 @@ const Characters = ({
       const response = await axios.get(
         `http://gateway.marvel.com/v1/public/characters?&offset=${offset}&limit=${limit}&ts=1&apikey=${apikey}&hash=${hash}`
       );
-      setData(response.data);
+      setFetched(response.data);
       setIsLoading(false);
     };
     fetchData();
@@ -44,13 +36,31 @@ const Characters = ({
       {hidden ? (
         <div>
           {isLoading ? (
-            <h1 className="waiting">is Loading ...</h1>
+            <h1 className="waiting">
+              is Loading <ReactLoading type={"spinningBubbles"} />
+            </h1>
           ) : (
             <div className="all-card">
-              {data.data.results.map((character) => {
+              {fetched.data.results.map((character) => {
                 return (
                   <div className="card" key={character.id}>
                     <div>
+                      <button
+                        onClick={() => {
+                          if ("favoris" in localStorage) {
+                            localStorage.setItem(
+                              "favoris",
+                              `${localStorage.getItem("favoris")}-${
+                                character.id
+                              }`
+                            );
+                          } else {
+                            localStorage.setItem("favoris", `${character.id}`);
+                          }
+                        }}
+                      >
+                        FAVORIS
+                      </button>
                       <Link
                         key={character.id}
                         to={"/characters/" + character.id}
@@ -61,6 +71,7 @@ const Characters = ({
                       >
                         <div className="box-characters">
                           <img
+                            alt={character.name}
                             className="img-characters"
                             src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                           ></img>
@@ -75,11 +86,10 @@ const Characters = ({
                   </div>
                 );
               })}
-              <div className="coucou">
+              <div className="pagination">
                 <Pagination
-                  className="pagination"
                   limit={limit}
-                  total={data.data.total}
+                  total={fetched.data.total}
                   setPage={setPage}
                   setOffset={setOffset}
                 />

@@ -77,7 +77,7 @@ i.fas.fa-search {
 }
 .sign-in,
 .btn-search,
-.comics:hover .btn-unlog,
+.comics:hover .btn-log,
 .btn-signUp,
 .btn-close-modal,
 .btn-logIn:hover {
@@ -88,17 +88,17 @@ i.fas.fa-search {
 button.characters,
 .btn-search,
 .comics,
-.btn-unlog,
+.btn-log,
 .btn-signUp,
 .btn-logIn:focus {
   outline: none;
 }
-.unlog {
+.log {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.btn-unlog {
+.btn-log {
   border: none;
   background-color: black;
   color: white;
@@ -458,6 +458,12 @@ div.img-description-modal {
 .input-password {
   display: flex;
   width: 72%;
+}
+
+/* ***** FAVORIS ***** */
+
+.window-favoris {
+  background-color: white;
 }
 
 /* ****** FOOTER ****** */

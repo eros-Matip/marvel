@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import Header from "../components/Header";
+import ReactLoading from "react-loading";
 
 function Description() {
   const { id } = useParams();
@@ -38,7 +39,9 @@ function Description() {
       <Header data={data} setData={setData} />
 
       {isLoading ? (
-        <h1 className="waiting">Your comics comming soon ...</h1>
+        <h1 className="waiting">
+          Your comics comming soon <ReactLoading type={"spinningBubbles"} />
+        </h1>
       ) : (
         <div className="box-all-modal">
           <button className="btn-close-modal" onClick={hiddenModalChange}>
@@ -59,6 +62,7 @@ function Description() {
                   <div className="modal">
                     <div className="img-description-modal">
                       <img
+                        alt={description.name}
                         className="img-description"
                         src={`${description.thumbnail.path}.${description.thumbnail.extension}`}
                       ></img>
@@ -78,6 +82,7 @@ function Description() {
                           <div className="all-modal-magazin" key={modal.id}>
                             <div className="all-img-modal">
                               <img
+                                alt={description.name}
                                 className="img-modal"
                                 src={`${modal.thumbnail.path}.${modal.thumbnail.extension}`}
                               ></img>

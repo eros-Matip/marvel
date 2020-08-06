@@ -5,6 +5,13 @@ function Pagination({ limit, total, setPage, setOffset }) {
 
   let buttons = [];
 
+  const handleClickFirst = () => {
+    buttons = buttons - 1;
+  };
+  const handleClicLast = () => {
+    buttons = buttons + 1;
+  };
+
   for (let index = 1; index <= buttonsCount; index++) {
     const result = index * limit - 100;
 
@@ -22,7 +29,14 @@ function Pagination({ limit, total, setPage, setOffset }) {
     );
   }
 
-  return <div>{buttons}</div>;
+  return (
+    <>
+      <button onClick={handleClickFirst}>-1</button>
+
+      <div>{buttons}</div>
+      <button onClick={handleClicLast}>+1</button>
+    </>
+  );
 }
 
 export default Pagination;

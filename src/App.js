@@ -15,9 +15,7 @@ const App = () => {
   const [id, setId] = useState("");
   const [search, setSearch] = useState({});
   const [location, setLocation] = useState("");
-  const [data, setData] = useState({});
-
-  const limit = 100;
+  const [fetched, setFetched] = useState({});
 
   let locationUrl = "";
 
@@ -36,16 +34,12 @@ const App = () => {
     const response = await axios.get(
       `http://gateway.marvel.com/v1/public${locationUrl}${search}&${process.env.REACT_APP_TS_HASH}`
     );
-    setData(response.data);
+    setFetched(response.data);
   };
   return (
     <div className="page">
       <Router>
-        <Header
-          handleSearch={handleSearch}
-          handleSubmit={handleSubmit}
-          data={setData}
-        />
+        <Header handleSearch={handleSearch} handleSubmit={handleSubmit} />
         <Switch>
           <Route path="/logIn">
             <LogIn />
@@ -57,27 +51,19 @@ const App = () => {
             <Comics
               setId={setId}
               setLocation={setLocation}
-              data={data}
-              setData={setData}
-              // setPage={setPage}
-              // offset={offset}
-              // setOffset={setOffset}
+              fetched={fetched}
+              setFetched={setFetched}
             />
           </Route>
           <Route path="/characters/:id">
             <Description id={id} />
           </Route>
-          {console.log("data->", data)}
           <Route path="/characters">
             <Characters
               setId={setId}
               setLocation={setLocation}
-              data={data}
-              setData={setData}
-              // page={page}
-              // setPage={setPage}
-              // offset={offset}
-              // setOffset={setOffset}
+              fetched={fetched}
+              setFetched={setFetched}
             />
           </Route>
           <Route path="/">
