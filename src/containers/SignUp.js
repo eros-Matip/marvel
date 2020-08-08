@@ -10,7 +10,6 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [data, setData] = useState({});
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -39,11 +38,10 @@ const SignUp = () => {
         passwordConfirm: passwordConfirm,
       }
     );
-    setData(response.data);
 
-    if (data.token) {
-      Cookies.set("userToken", data.token);
-      Cookies.set("username", data.account.username);
+    if (response.data) {
+      Cookies.set("userToken", response.data.token);
+      Cookies.set("username", response.data.account.username);
       history.push("/characters");
     }
   };

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 function Search(setData) {
-  const [data, setData] = useState("");
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,6 +14,7 @@ function Search(setData) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const response = await axios.get(
       `http://gateway.marvel.com/v1/public/characters?name=${search}&ts=1&apikey=${apikey}&hash=${hash}`
     );

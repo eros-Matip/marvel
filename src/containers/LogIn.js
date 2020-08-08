@@ -27,9 +27,9 @@ const LogIn = () => {
     );
     setData(response.data);
 
-    if (data.token) {
-      Cookies.set("userToken", data.token);
-      Cookies.set("username", data.username);
+    if (data) {
+      Cookies.set("userToken", response.data.token);
+      Cookies.set("username", response.data.username);
       history.push("/characters");
     }
   };

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../img/logo.png";
 import Cookies from "js-cookie";
-import Favoris from "./Favoris";
 
 function Header({ handleSearch, handleSubmit }) {
   const name = Cookies.get("username");
@@ -32,17 +31,6 @@ function Header({ handleSearch, handleSubmit }) {
     setlog(!log);
   };
 
-  const handleClicFavoris = () => {
-    history.push("/favoris");
-  };
-
-  // function favoris() {
-  //   return (
-  //     <>
-  //       <div>Hello FAVORIS</div>
-  //     </>
-  //   );
-
   return (
     <div className="header">
       <div className="box-header">
@@ -62,9 +50,11 @@ function Header({ handleSearch, handleSubmit }) {
                 placeholder="search ..."
                 onChange={handleSearch}
               ></input>
+
               <button className="btn-search" type="submit">
                 search
               </button>
+
               <button
                 className="btn-searchClose"
                 type="checked"
@@ -86,13 +76,9 @@ function Header({ handleSearch, handleSubmit }) {
           <Link to="/comics">
             <button className="comics">Comics</button>
           </Link>
+
           {name ? (
             <div>
-              <div className="favoris">
-                <button className="btn-favoris" onClick={handleClicFavoris}>
-                  Favoris
-                </button>
-              </div>
               <div className="log">
                 <p className="name-header">{name}</p>
                 <button className="btn-log" onClick={handleClick}>
@@ -107,7 +93,9 @@ function Header({ handleSearch, handleSubmit }) {
                   SignUp
                 </button>
               </Link>
+
               <p>/</p>
+
               <Link to="logIn">
                 <button className="btn-logIn" onClick={handleClicklogin}>
                   logIn
@@ -117,10 +105,8 @@ function Header({ handleSearch, handleSubmit }) {
           )}
         </div>
       </div>
-      <Favoris className="white" />;
     </div>
   );
-  // }
 }
 
 export default Header;

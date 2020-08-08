@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./containers/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import axios from "axios";
+import "./App.css";
+
 import Home from "./containers/Home";
 import Characters from "./containers/Characters";
 import Description from "./containers/Description";
 import Comics from "./containers/Comics";
-import axios from "axios";
 import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
-import "./App.css";
+
+//
 
 const App = () => {
   const [id, setId] = useState("");
@@ -36,10 +39,14 @@ const App = () => {
     );
     setFetched(response.data);
   };
+
   return (
     <div className="page">
       <Router>
         <Header handleSearch={handleSearch} handleSubmit={handleSubmit} />
+
+        {/* <Favoris className="white" /> */}
+
         <Switch>
           <Route path="/logIn">
             <LogIn />

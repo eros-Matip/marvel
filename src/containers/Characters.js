@@ -10,7 +10,6 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
   const [offset, setOffset] = useState(0);
   const [page, setPage] = useState(0);
 
-  // const [favorisTab, setFavorisTab] = useState([]);
   const [hidden, sethidden] = useState(true);
   const location = useLocation();
 
@@ -26,10 +25,10 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
       );
       setFetched(response.data);
       setIsLoading(false);
+      setLocation(location.pathname);
     };
     fetchData();
   }, [page]);
-  setLocation(location.pathname);
 
   return (
     <div>
@@ -44,23 +43,21 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
               {fetched.data.results.map((character) => {
                 return (
                   <div className="card" key={character.id}>
+                    <button
+                      className="btn-star"
+                      onClick={() => {
+                        localStorage.setItem(
+                          `${"Favoris"}`,
+                          JSON.stringify(
+                            `{name:${character.name}`,
+                            `image: {${character.thumbnail.path}.${character.thumbnail.extension}}`
+                          )
+                        );
+                      }}
+                    >
+                      <i className="far fa-star"></i>
+                    </button>
                     <div>
-                      <button
-                        onClick={() => {
-                          if ("favoris" in localStorage) {
-                            localStorage.setItem(
-                              "favoris",
-                              `${localStorage.getItem("favoris")}-${
-                                character.id
-                              }`
-                            );
-                          } else {
-                            localStorage.setItem("favoris", `${character.id}`);
-                          }
-                        }}
-                      >
-                        FAVORIS
-                      </button>
                       <Link
                         key={character.id}
                         to={"/characters/" + character.id}
@@ -75,6 +72,7 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
                             className="img-characters"
                             src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                           ></img>
+
                           <h2 className="h2-characters">{character.name}</h2>
 
                           <p className="text-characters">

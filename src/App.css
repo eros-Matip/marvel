@@ -6,6 +6,7 @@ html {
   height: 100vh;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
@@ -22,6 +23,34 @@ html {
   background-color: black;
   color: white;
 }
+.sign-in,
+.btn-search,
+.comics:hover,
+.btn-log,
+.btn-signUp,
+.btn-close-modal,
+.btn-logIn,
+.button.characters,
+.btn-logInSubmit,
+.btn-signInSubmit,
+.btn-favoris:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+.sign-in,
+.btn-search,
+.comics:hover,
+.btn-log,
+.btn-signUp,
+.btn-close-modal,
+.btn-logIn,
+.button.characters,
+.btn-favoris,
+.btn-logInSubmit,
+.btn-signInSubmit:focus {
+  outline: none;
+}
 
 /* ***** HEADER ***** */
 .header {
@@ -30,6 +59,7 @@ html {
   width: 100%;
   box-shadow: rgb(26, 26, 26) 2px 15px 10px;
   top: 0px;
+  z-index: 9999;
 }
 .box-header {
   display: flex;
@@ -65,7 +95,8 @@ i.fas.fa-search {
 }
 .sign-in,
 .characters,
-.comics {
+.comics,
+.btn-favoris {
   height: 40px;
   color: white;
   background-color: black;
@@ -75,24 +106,7 @@ i.fas.fa-search {
   font-weight: 600;
   cursor: pointer;
 }
-.sign-in,
-.btn-search,
-.comics:hover .btn-log,
-.btn-signUp,
-.btn-close-modal,
-.btn-logIn:hover {
-  outline: none;
-  cursor: pointer;
-}
 
-button.characters,
-.btn-search,
-.comics,
-.btn-log,
-.btn-signUp,
-.btn-logIn:focus {
-  outline: none;
-}
 .log {
   display: flex;
   flex-direction: column;
@@ -182,6 +196,7 @@ div.logInSignUp {
 }
 
 /* ***** CHARACTERS ***** */
+
 .box-characters {
   width: 200px;
   height: 300px;
@@ -211,6 +226,7 @@ div.logInSignUp {
   color: white;
   padding: 5px;
   border-radius: 5px;
+  position: relative;
 }
 
 .card:hover {
@@ -233,6 +249,18 @@ div.logInSignUp {
 a {
   text-decoration: none;
   color: black;
+}
+.btn-star {
+  background-color: black;
+  border: none;
+}
+
+.far.fa-star {
+  color: red;
+  margin-top: 10px;
+  right: 15px;
+  font-size: xx-large;
+  position: absolute;
 }
 /* ***** COMICS ***** */
 
@@ -313,7 +341,7 @@ a {
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
   background-color: black;
-  box-shadow: lightgrey 10px 10px 25px 10px;
+  box-shadow: lightgrey 10px 5px 35px 7px;
   border-radius: 5px;
   height: 80%;
   width: 80%;
@@ -331,7 +359,7 @@ div.img-description-modal {
 .details-modal {
   display: flex;
   width: 50%;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px 10px 20px;
   flex-direction: column;
 }
 
@@ -444,7 +472,7 @@ div.img-description-modal {
 }
 .btn-logInSubmit,
 .btn-signInSubmit {
-  margin: 40px;
+  margin: 25px;
   width: 100px;
   height: 40px;
   font-size: medium;
@@ -455,21 +483,32 @@ div.img-description-modal {
   border: none;
   box-shadow: lightgrey 5px 5px 5px;
 }
+
 .input-password {
   display: flex;
   width: 72%;
 }
 
 /* ***** FAVORIS ***** */
+.box-favoris {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .window-favoris {
   background-color: white;
+  height: 70%;
+  width: 80%;
+  opacity: 0.9;
+  position: absolute;
+  top: 20%;
 }
 
 /* ****** FOOTER ****** */
 
 .footer {
-  height: 50px;
+  height: 90px;
   width: 100%;
   background-color: black;
 }

@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
 import axios from "axios";
-// import Cookies from "js-cookie";
 import { useLocation } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-const Comics = ({ setId, setLocation, fetched, setFetched }) => {
+const Comics = ({ setLocation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
+  const [fetched, setFetched] = useState({});
   const [page, setPage] = useState(0);
-  // const [favoris, setFavoris] = useState(false);
   const location = useLocation();
 
   const limit = 100;
+
+  // React Hook useEffect has missing dependencies: 'location.pathname', 'offset', 'setFetched',
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
         `http://gateway.marvel.com/v1/public/comics?offset=${offset}&limit=${limit}&${process.env.REACT_APP_TS_HASH}`
       );
-      setFetched(response.data);
+
+      setFetched(response.data.data);
       setIsLoading(false);
-      fetchData();
     };
+    fetchData();
   }, [page]);
+
   setLocation(location.pathname);
+  console.log("fetched->", fetched);
 
   return (
     <div className="page-comics">
@@ -35,7 +39,7 @@ const Comics = ({ setId, setLocation, fetched, setFetched }) => {
         </h1>
       ) : (
         <div className="all-comics">
-          {fetched.data.results.map((comic) => {
+          {fetched.results.map((comic) => {
             return (
               <div key={comic.id} className="box-comics">
                 <div>
@@ -62,7 +66,7 @@ const Comics = ({ setId, setLocation, fetched, setFetched }) => {
             <Pagination
               className="pagination"
               limit={limit}
-              total={fetched.data.total}
+              total={fetched.total}
               setPage={setPage}
               setOffset={setOffset}
             />
