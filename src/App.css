@@ -33,13 +33,18 @@ html {
 .button.characters,
 .btn-logInSubmit,
 .btn-signInSubmit,
+.btn-searchClose,
+.fas.fa-search,
 .btn-favoris:hover {
   outline: none;
   cursor: pointer;
 }
 
 .sign-in,
+.characters,
+.comics,
 .btn-search,
+.btn-searchClose,
 .comics:hover,
 .btn-log,
 .btn-signUp,

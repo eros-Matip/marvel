@@ -68,6 +68,7 @@ const Comics = ({ setLocation }) => {
               limit={limit}
               total={fetched.total}
               setPage={setPage}
+              offset={offset}
               setOffset={setOffset}
             />
           </div>

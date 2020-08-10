@@ -89,6 +89,7 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
                   limit={limit}
                   total={fetched.data.total}
                   setPage={setPage}
+                  offset={offset}
                   setOffset={setOffset}
                 />
               </div>
