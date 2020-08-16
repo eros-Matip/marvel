@@ -260,7 +260,8 @@ a {
   border: none;
 }
 
-.far.fa-star {
+.far.fa-star,
+.fas.fa-star {
   color: red;
   margin-top: 10px;
   right: 15px;

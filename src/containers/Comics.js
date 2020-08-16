@@ -4,16 +4,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import ReactLoading from "react-loading";
 
-const Comics = ({ setLocation }) => {
+const Comics = ({ setLocation, fetched, setFetched }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [offset, setOffset] = useState(0);
-  const [fetched, setFetched] = useState({});
   const [page, setPage] = useState(0);
   const location = useLocation();
 
   const limit = 100;
-
-  // React Hook useEffect has missing dependencies: 'location.pathname', 'offset', 'setFetched',
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +25,6 @@ const Comics = ({ setLocation }) => {
   }, [page]);
 
   setLocation(location.pathname);
-  console.log("fetched->", fetched);
 
   return (
     <div className="page-comics">

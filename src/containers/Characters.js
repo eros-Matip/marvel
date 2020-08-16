@@ -11,9 +11,11 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
   const [page, setPage] = useState(0);
 
   const [hidden, sethidden] = useState(true);
+  const [pushed, setPushed] = useState(false);
   const location = useLocation();
 
   const limit = 100;
+  setLocation(location.pathname);
 
   useEffect(() => {
     const apikey = process.env.REACT_APP_KEY_PUBLIC;
@@ -25,7 +27,6 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
       );
       setFetched(response.data);
       setIsLoading(false);
-      setLocation(location.pathname);
     };
     fetchData();
   }, [page]);
@@ -46,16 +47,21 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
                     <button
                       className="btn-star"
                       onClick={() => {
-                        localStorage.setItem(
-                          `${"Favoris"}`,
-                          JSON.stringify(
-                            `{name:${character.name}`,
-                            `image: {${character.thumbnail.path}.${character.thumbnail.extension}}`
-                          )
-                        );
+                        setPushed(!pushed);
+                        // localStorage.setItem(
+                        //   `${"Favoris"}`,
+                        //   JSON.stringify(
+                        //     `{name:${character.name}`,
+                        //     `image: {${character.thumbnail.path}.${character.thumbnail.extension}}`
+                        //   )
+                        // );
                       }}
                     >
-                      <i className="far fa-star"></i>
+                      {pushed ? (
+                        <i className="fas fa-star"></i>
+                      ) : (
+                        <i className="far fa-star"></i>
+                      )}
                     </button>
                     <div>
                       <Link

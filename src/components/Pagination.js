@@ -7,7 +7,6 @@ function Pagination({ limit, total, setPage, offset, setOffset }) {
 
   for (let index = 1; index <= buttonsCount; index++) {
     const result = index * limit - 100;
-    const littleResult = Math.round(index / 3);
     buttons.push(
       <button
         className="pagination"
@@ -20,7 +19,6 @@ function Pagination({ limit, total, setPage, offset, setOffset }) {
         {index}
       </button>
     );
-    console.log("littleResult->", littleResult);
   }
   const handleChangePreviews = () => {
     setPage(1);
@@ -45,19 +43,19 @@ function Pagination({ limit, total, setPage, offset, setOffset }) {
     }
   };
 
-  const prev100Pages = () => {
-    setOffset(offset - 100);
-    if (offset >= 10000) {
-      setOffset(offset - 10000);
-    }
-  };
+  // const prev100Pages = () => {
+  //   setOffset(offset - 100);
+  //   if (offset >= 10000) {
+  //     setOffset(offset - 10000);
+  //   }
+  // };
 
-  const next100Pages = () => {
-    setOffset(offset + 100);
-    if (offset <= total - 10000) {
-      setOffset(offset + 10000);
-    }
-  };
+  // const next100Pages = () => {
+  //   setOffset(offset + 100);
+  //   if (offset <= total - 10000) {
+  //     setOffset(offset + 10000);
+  //   }
+  // };
   return (
     <>
       {/* {buttonsCount < 100? } */}

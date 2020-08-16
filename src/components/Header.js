@@ -64,6 +64,12 @@ function Header({ handleSearch, handleSubmit }) {
               </button>
             </form>
           )}
+          {name && (
+            <div>
+              <i className="far fa-grin-stars white"></i>
+              <button>Favoris</button>
+            </div>
+          )}
         </div>
 
         <div className="header-box-right">

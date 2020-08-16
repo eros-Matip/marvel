@@ -56,7 +56,6 @@ const App = () => {
           </Route>
           <Route path="/comics">
             <Comics
-              setId={setId}
               setLocation={setLocation}
               fetched={fetched}
               setFetched={setFetched}
