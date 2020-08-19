@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import ReactLoading from "react-loading";
+
 import Description from "./Description";
 import Pagination from "../components/Pagination";
-import { Link, useLocation } from "react-router-dom";
-import ReactLoading from "react-loading";
 
 const Characters = ({ setId, setLocation, fetched, setFetched }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,6 +32,10 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
     fetchData();
   }, [page]);
 
+  // const handleSubmitFavoris = () => {
+  //   console.log(character);
+  // };
+
   return (
     <div>
       {hidden ? (
@@ -47,14 +52,12 @@ const Characters = ({ setId, setLocation, fetched, setFetched }) => {
                     <button
                       className="btn-star"
                       onClick={() => {
-                        setPushed(!pushed);
-                        // localStorage.setItem(
-                        //   `${"Favoris"}`,
-                        //   JSON.stringify(
+                        console.log(character);
+                        console.log(character.name);
+                        console.log(character.thumbnail);
+                        // setPushed(!pushed);
                         //     `{name:${character.name}`,
                         //     `image: {${character.thumbnail.path}.${character.thumbnail.extension}}`
-                        //   )
-                        // );
                       }}
                     >
                       {pushed ? (

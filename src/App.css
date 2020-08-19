@@ -64,7 +64,7 @@ html {
   width: 100%;
   box-shadow: rgb(26, 26, 26) 2px 15px 10px;
   top: 0px;
-  z-index: 9999;
+  z-index: 999;
 }
 .box-header {
   display: flex;
@@ -509,6 +509,8 @@ div.img-description-modal {
   opacity: 0.9;
   position: absolute;
   top: 20%;
+  z-index: 9;
+  position: fixed;
 }
 
 /* ****** FOOTER ****** */

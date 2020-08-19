@@ -3,7 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import Logo from "../img/logo.png";
 import Cookies from "js-cookie";
 
-function Header({ handleSearch, handleSubmit }) {
+function Header({
+  handleSearch,
+  handleSubmit,
+  favoriteHidden,
+  setFavoriteHidden,
+}) {
   const name = Cookies.get("username");
   const [hidden, setHidden] = useState(false);
   const [log, setlog] = useState(true);
@@ -31,6 +36,9 @@ function Header({ handleSearch, handleSubmit }) {
     setlog(!log);
   };
 
+  const handleChangeFavorite = () => {
+    setFavoriteHidden(!favoriteHidden);
+  };
   return (
     <div className="header">
       <div className="box-header">
@@ -67,7 +75,7 @@ function Header({ handleSearch, handleSubmit }) {
           {name && (
             <div>
               <i className="far fa-grin-stars white"></i>
-              <button>Favoris</button>
+              <button onClick={handleChangeFavorite}>Favoris</button>
             </div>
           )}
         </div>

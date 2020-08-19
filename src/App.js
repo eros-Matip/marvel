@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Footer from "./containers/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 
+import Header from "./components/Header";
+import Footer from "./containers/Footer";
 import Home from "./containers/Home";
 import Characters from "./containers/Characters";
 import Description from "./containers/Description";
 import Comics from "./containers/Comics";
 import SignUp from "./containers/SignUp";
 import LogIn from "./containers/LogIn";
-
-//
+import Favoris from "./components/Favoris";
 
 const App = () => {
   const [id, setId] = useState("");
   const [search, setSearch] = useState({});
   const [location, setLocation] = useState("");
   const [fetched, setFetched] = useState({});
+  const [favoriteHidden, setFavoriteHidden] = useState(true);
 
   let locationUrl = "";
 
@@ -43,9 +43,13 @@ const App = () => {
   return (
     <div className="page">
       <Router>
-        <Header handleSearch={handleSearch} handleSubmit={handleSubmit} />
-
-        {/* <Favoris className="white" /> */}
+        <Header
+          handleSearch={handleSearch}
+          handleSubmit={handleSubmit}
+          favoriteHidden={favoriteHidden}
+          setFavoriteHidden={setFavoriteHidden}
+        />
+        {!favoriteHidden && <Favoris className="modal white" />}
 
         <Switch>
           <Route path="/logIn">

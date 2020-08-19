@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-const Favoris = (setHiddenFavoris) => {
+const Favoris = () => {
   const [fetched, setFetched] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -10,7 +10,7 @@ const Favoris = (setHiddenFavoris) => {
 
     const fetchData = async () => {
       const response = await axios.get(
-        `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=${apikey}&hash=${hash}`
+        `${process.env.REACT_APP_API_URL}/favorite`
       );
       setFetched(response.data);
       setIsLoading(false);
@@ -22,11 +22,11 @@ const Favoris = (setHiddenFavoris) => {
   return (
     <div>
       {isLoading ? (
-        <h1>patienter ...</h1>
+        <h1 className="box-favoris">patienter ...</h1>
       ) : (
         <div className="box-favoris">
           <div className="window-favoris">
-            <div className="div-favoris">Hello FAvoris 2</div>
+            <div className="div-favoris">Hello FAvoris </div>
           </div>
         </div>
       )}
